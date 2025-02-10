@@ -1,0 +1,26 @@
+{
+  "name": "webcito/nps-gauge",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "thomas",
+      "email": "email@example.com"
+    }
+  ],
+  "require": {
+    "components/jquery": "^3",
+    "npm-asset/chart.js": "@stable",
+    "npm-asset/chartjs-plugin-annotation": "@stable"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    }
+  ],
+  "require-dev": {
+    "roave/security-advisories": "dev-latest"
+  }
+}

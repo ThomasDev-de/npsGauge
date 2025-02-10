@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NPS Gauge</title>
+</head>
+<body>
+
+
+<div class="nps-gauge" data-nps="-55" style="width: 200px; height: 200px;"></div>
+<div class="nps-gauge" data-nps="95" style="width: 200px; height: 200px;"></div>
+<script src="../vendor/components/jquery/jquery.min.js"></script>
+<script src="../vendor/npm-asset/chart.js/dist/chart.umd.js"></script>
+<script src="../vendor/npm-asset/chartjs-plugin-annotation/dist/chartjs-plugin-annotation.min.js"></script>
+<script src="../dist/jquery-nps-gauge.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.nps-gauge').npsGauge();
+    })
+</script>
+</body>
+</html>
