@@ -77,7 +77,7 @@
                 } else {
                     progressColor = '#4caf50'; // Grün für hohe Werte (über 80)
                 }
-                
+
 
                 // Prozentualer Fortschritt aktualisieren (0 bis 100)
                 const progressPercent = ((animationProgress + 100) / 200) * 100;
@@ -131,7 +131,7 @@
                     ctx.lineTo(baseLeftX, baseLeftY); // Linkes Ende der Basis
                     ctx.lineTo(baseRightX, baseRightY); // Rechtes Ende der Basis
                     ctx.closePath();
-                    ctx.fillStyle = 'rgba(10, 10, 10, 0.8)'; // Zeigerfarbe
+                    ctx.fillStyle = 'rgba(10, 10, 10, 1)'; // Zeigerfarbe
                     ctx.fill();
                     ctx.restore();
 
