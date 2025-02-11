@@ -1,24 +1,53 @@
 (function ($) {
-    $.fn.npsGauge = function (nsp) {
+    $.fn.npsGauge = function (options) {
         if ($(this).length > 1) {
             return $(this).each(function (i, e) {
-                return $(e).npsGauge(nsp);
+                return $(e).npsGauge(options);
             })
         }
 
         const $el = $(this);
-        const value = $el.data('nps') || nsp || 0;
+        // Standard-Parameter
+        const defaults = {
+            minValue: -100,
+            maxValue: 100,
+            value: 0,
+            width: 200, // Standardbreite
+            height: 200 // Standardhöhe
+        };
+
+
+        // Alle Einstellungen zusammenführen: Defaults, data-Attribute, Optionen
+        const settings = $.extend({}, defaults, $el.data(), options);
+console.log(settings);
+
+        const value = settings.value || 0;
 
 
         function createGaugeChart($element, nps) {
             let canvasElement;
             if ($element.is('canvas')) {
                 canvasElement = $element.get(0);
+                canvasElement.width = settings.width + 'px';
+                canvasElement.height = settings.height + 'px';
             } else {
-                const canvas = $('<canvas>').appendTo($element);
+                console.log(settings.width, settings.height);
+                $element.css({
+                    height: settings.height + 'px',
+                    width: settings.width + 'px'
+                });
+                const canvas = $('<canvas>', {
+                    width: settings.width,
+                    height: settings.height
+                }).css({
+                    width: settings.width + 'px',
+                    height: settings.height + 'px'
+                }).appendTo($element);
+
                 canvasElement = canvas.get(0);
             }
             const ctx = canvasElement.getContext('2d');
+
 
 
 
@@ -58,7 +87,7 @@
             };
 
             // Animation von -100 bis "value"
-            let animationProgress = -100; // Start bei -100
+            let animationProgress = settings.minValue; // Start bei -100
             const duration = 1500; // Animation dauert 1,5 Sekunden
             const startTime = performance.now(); // Startzeit der Animation
 
@@ -66,7 +95,7 @@
                 // Fortschritt berechnen
                 const elapsed = frameTime - startTime;
                 const progress = Math.min(elapsed / duration, 1); // Fortschritt max bis 1
-                animationProgress = -100 + (clampedNps + 100) * progress;
+                animationProgress = settings.minValue + (clampedNps + settings.maxValue) * progress;
 
                 // Dynamische Farbzuordnung basierend auf aktueller Position
                 let progressColor;
@@ -192,7 +221,7 @@
             ctx.textBaseline = 'middle'; // Text vertikal mittig ausrichten
 
             // Schleife für kleine Markierungen (Zwischenwerte)
-            for (let i = -100; i <= 100; i += minorStep) {
+            for (let i = settings.minValue; i <= settings.maxValue; i += minorStep) {
                 const percent = (i + 100) / 200; // Wertebereich: 0 (bei -100) bis 1 (bei 100)
                 const angle = startAngle + percent * (endAngle - startAngle);
 
@@ -212,7 +241,7 @@
             }
 
             // Schleife für große Markierungen (Hauptwerte)
-            for (let i = -100; i <= 100; i += majorStep) {
+            for (let i = settings.minValue; i <= settings.maxValue; i += majorStep) {
                 const percent = (i + 100) / 200; // Wertebereich: 0 (bei -100) bis 1 (bei 100)
                 const angle = startAngle + percent * (endAngle - startAngle);
 

@@ -3,12 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>NPS Gauge</title>
+    <style>
+        .nps-gauge {
+            margin: 10px;
+        }
+    </style>
 </head>
 <body>
 
-
-<div class="nps-gauge" data-nps="-55" style="width: 200px; height: 200px;"></div>
-<div class="nps-gauge" data-nps="95" style="width: 200px; height: 200px;"></div>
+<div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
+    <div class="nps-gauge" data-value="-55" data-width="200" data-height="200"></div>
+    <div class="nps-gauge" data-value="0" data-width="200" data-height="200"></div>
+    <div class="nps-gauge" data-value="25" data-width="200" data-height="200"></div>
+    <div class="nps-gauge" data-value="75" data-width="200" data-height="200"></div>
+    <div class="nps-gauge" data-value="100" data-width="200" data-height="200"></div>
+</div>
+<div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
+<div class="nps-gauge" data-value="100" data-width="400" data-height="400"></div>
+</div>
 <script src="../vendor/components/jquery/jquery.min.js"></script>
 <script src="../vendor/npm-asset/chart.js/dist/chart.umd.js"></script>
 <script src="../vendor/npm-asset/chartjs-plugin-annotation/dist/chartjs-plugin-annotation.min.js"></script>
